@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'controllers/favorite_controller.dart';
 import 'controllers/task_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'core/theme/app_theme.dart';
@@ -10,10 +11,12 @@ class PocketTaskApp extends StatelessWidget {
     super.key,
     required this.themeController,
     required this.taskController,
+    required this.favoriteController,
   });
 
   final ThemeController themeController;
   final TaskController taskController;
+  final FavoriteController favoriteController; // EXPERIMENT 2
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +31,7 @@ class PocketTaskApp extends StatelessWidget {
         home: HomePage(
           taskController: taskController,
           themeController: themeController,
+          favoriteController: favoriteController,
         ),
       ),
     );

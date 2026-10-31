@@ -11,6 +11,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
     required this.ongoing,
     required this.finished,
     required this.cancelled,
+    required this.favorite,
   });
 
   final Color add;
@@ -19,6 +20,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
   final Color ongoing;
   final Color finished;
   final Color cancelled;
+  final Color favorite; // EXPERIMENT 2: star color
 
   static const SemanticColors light = SemanticColors(
     add: Color(0xFF3FA37A),
@@ -27,6 +29,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
     ongoing: Color(0xFFD99A2B),
     finished: Color(0xFF3FA37A),
     cancelled: Color(0xFF8A94A0),
+    favorite: Color(0xFFE5A100),
   );
 
   static const SemanticColors dark = SemanticColors(
@@ -36,6 +39,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
     ongoing: Color(0xFFF0C066),
     finished: Color(0xFF5FCFA0),
     cancelled: Color(0xFFA7B0BA),
+    favorite: Color(0xFFFFCA4D),
   );
 
   @override
@@ -46,6 +50,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
     Color? ongoing,
     Color? finished,
     Color? cancelled,
+    Color? favorite,
   }) {
     return SemanticColors(
       add: add ?? this.add,
@@ -54,6 +59,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
       ongoing: ongoing ?? this.ongoing,
       finished: finished ?? this.finished,
       cancelled: cancelled ?? this.cancelled,
+      favorite: favorite ?? this.favorite,
     );
   }
 
@@ -67,6 +73,7 @@ class SemanticColors extends ThemeExtension<SemanticColors> {
       ongoing: Color.lerp(ongoing, other.ongoing, t)!,
       finished: Color.lerp(finished, other.finished, t)!,
       cancelled: Color.lerp(cancelled, other.cancelled, t)!,
+      favorite: Color.lerp(favorite, other.favorite, t)!,
     );
   }
 }

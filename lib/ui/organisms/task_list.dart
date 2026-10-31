@@ -11,11 +11,15 @@ class TaskList extends StatelessWidget {
     required this.tasks,
     required this.onEdit,
     required this.onDelete,
+    required this.isFavorite,
+    required this.onToggleFavorite,
   });
 
   final List<Task> tasks;
   final ValueChanged<Task> onEdit;
   final ValueChanged<Task> onDelete;
+  final bool Function(Task) isFavorite; // EXPERIMENT 2
+  final ValueChanged<Task> onToggleFavorite; // EXPERIMENT 2
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,8 @@ class TaskList extends StatelessWidget {
         task: tasks[i],
         onEdit: () => onEdit(tasks[i]),
         onDelete: () => onDelete(tasks[i]),
+        isFavorite: isFavorite(tasks[i]),
+        onToggleFavorite: () => onToggleFavorite(tasks[i]),
       ),
     );
   }

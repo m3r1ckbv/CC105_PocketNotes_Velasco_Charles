@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../controllers/favorite_controller.dart';
 import '../../controllers/task_controller.dart';
 import '../../controllers/theme_controller.dart';
 import '../../core/theme/semantic_colors.dart';
@@ -17,10 +18,12 @@ class HomePage extends StatelessWidget {
     super.key,
     required this.taskController,
     required this.themeController,
+    required this.favoriteController,
   });
 
   final TaskController taskController;
   final ThemeController themeController;
+  final FavoriteController favoriteController; // EXPERIMENT 2
 
   Future<void> _addTask(BuildContext context) async {
     final task = await TaskFormDialog.show(context);
@@ -46,7 +49,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: Listenable.merge([taskController, themeController]),
+      listenable: Listenable.merge([taskController, themeController, favoriteController]),
       builder: (context, _) => HomeTemplate(
         appBar: AppTopBar(
           title: 'Pocket Task',
@@ -57,6 +60,9 @@ class HomePage extends StatelessWidget {
           tasks: taskController.tasks,
           onEdit: (t) => _editTask(context, t),
           onDelete: (t) => _deleteTask(context, t),
+          // EXPERIMENT 2: favorites come from RAM, not from the database.
+          isFavorite: favoriteController.isFavorite,
+          onToggleFavorite: favoriteController.toggle,
         ),
         floatingActionButton: AppFab(
           icon: Icons.add,

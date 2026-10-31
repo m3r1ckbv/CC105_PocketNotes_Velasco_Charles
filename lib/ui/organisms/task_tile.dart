@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/task.dart';
+import '../atoms/favorite_button.dart';
 import '../molecules/edit_delete_actions.dart';
 import '../molecules/task_details.dart';
 
@@ -11,11 +12,15 @@ class TaskTile extends StatelessWidget {
     required this.task,
     required this.onEdit,
     required this.onDelete,
+    required this.isFavorite,
+    required this.onToggleFavorite,
   });
 
   final Task task;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
+  final bool isFavorite; // EXPERIMENT 2 (memory only)
+  final VoidCallback onToggleFavorite; // EXPERIMENT 2
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,11 @@ class TaskTile extends StatelessWidget {
         child: Row(
           children: [
             Expanded(child: TaskDetails(task: task)),
+            // EXPERIMENT 2: star placed before Edit / Delete.
+            FavoriteButton(
+              isFavorite: isFavorite,
+              onPressed: onToggleFavorite,
+            ),
             EditDeleteActions(onEdit: onEdit, onDelete: onDelete),
           ],
         ),
